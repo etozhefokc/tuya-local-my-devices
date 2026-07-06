@@ -7,6 +7,7 @@ import logging
 import shutil
 from pathlib import Path
 
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.event import async_call_later
 
@@ -21,15 +22,27 @@ def _copy_device_files(source_dir: Path, dest_dir: Path) -> None:
         shutil.copy2(yaml_file, dest_dir / yaml_file.name)
 
 
-async def async_setup(hass: HomeAssistant, config: dict) -> bool:
-    """Copy device YAMLs into tuya_local/devices/ at startup."""
+def _do_copy(hass: HomeAssistant) -> None:
+    """Copy device configs into tuya_local/devices/."""
     source = Path(__file__).parent / "devices"
     dest = Path(hass.config.config_dir) / "custom_components" / "tuya_local" / "devices"
+    _copy_device_files(source, dest)
+    _LOGGER.info("Copied Tuya Local device configs to %s", dest)
 
-    def _do_copy(*_):
-        _copy_device_files(source, dest)
-        _LOGGER.info("Copied Tuya Local device configs to %s", dest)
 
-    # Delay slightly so tuya_local is already loaded
-    async_call_later(hass, 1, _do_copy)
+async def async_setup(hass: HomeAssistant, config: dict) -> bool:
+    """Set up via configuration.yaml — copy files then return."""
+    async_call_later(hass, 1, lambda _: _do_copy(hass))
     return True
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up via UI config flow — copy files, set up platforms."""
+    await hass.async_add_executor_job(_do_copy, hass)
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
+    return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload — remove sensor platform."""
+    return await hass.config_entries.async_unload_platforms(entry, ["sensor"])

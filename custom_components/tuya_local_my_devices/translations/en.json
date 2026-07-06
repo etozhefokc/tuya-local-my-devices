@@ -9,5 +9,12 @@
     "abort": {
       "single_instance_allowed": "Already configured. Only one instance is allowed."
     }
+  },
+  "entity": {
+    "sensor": {
+      "device_count": {
+        "name": "Bundled device configs"
+      }
+    }
   }
 }
