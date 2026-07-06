@@ -1,0 +1,12 @@
+{
+  "domain": "tuya_local_my_devices",
+  "name": "Tuya Local — My Devices",
+  "version": "1.0.0",
+  "documentation": "https://github.com/astrizhenyuk/tuya-local-my-devices",
+  "issue_tracker": "https://github.com/astrizhenyuk/tuya-local-my-devices/issues",
+  "dependencies": [],
+  "after_dependencies": ["tuya_local"],
+  "codeowners": ["@astrizhenyuk"],
+  "iot_class": "local_push",
+  "requirements": []
+}
