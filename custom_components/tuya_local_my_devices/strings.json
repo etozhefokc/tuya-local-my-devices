@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tuya Local — My Devices",
+        "description": "Add bundled device configs to tuya_local.\n\nOn startup, YAML files from the integration's `devices/` folder will be copied into `tuya_local/devices/` so they are picked up automatically."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Already configured. Only one instance is allowed."
+    }
+  }
+}

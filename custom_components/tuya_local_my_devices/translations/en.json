@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tuya Local — My Devices",
+        "description": "Copies device YAML configs into `tuya_local/devices/` on each startup.\n\nAfter adding, restart Home Assistant for the devices to appear."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Already configured. Only one instance is allowed."
+    }
+  }
+}
