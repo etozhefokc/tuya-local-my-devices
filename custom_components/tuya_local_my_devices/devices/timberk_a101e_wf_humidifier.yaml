@@ -17,44 +17,44 @@ entities:
         name: humidity
         mapping:
           - dps_val: "cancel"
-            value: 0
+            value: null
+            hidden: true
           - dps_val: "40"
             value: 40
+            step: 5
           - dps_val: "45"
             value: 45
+            step: 5
           - dps_val: "50"
             value: 50
+            step: 5
           - dps_val: "55"
             value: 55
+            step: 5
           - dps_val: "60"
             value: 60
+            step: 5
           - dps_val: "65"
             value: 65
+            step: 5
           - dps_val: "70"
             value: 70
+            step: 5
           - dps_val: "75"
             value: 75
+            step: 5
           - dps_val: "80"
             value: 80
+            step: 5
           - dps_val: "85"
             value: 85
+            step: 5
           - dps_val: "90"
             value: 90
+            step: 5
       - id: 14
         type: integer
         name: current_humidity
-      - id: 23
-        type: string
-        name: mode
-        mapping:
-          - dps_val: level_0
-            value: off
-          - dps_val: level_1
-            value: low
-          - dps_val: level_2
-            value: medium
-          - dps_val: level_3
-            value: high
   - entity: sensor
     class: temperature
     dps:
@@ -115,10 +115,9 @@ entities:
         mapping:
           - dps_val: 0
             value: false
-          - dps_val: null
           - value: true
   - entity: select
-    translation_key: mode
+    translation_key: fan_with_presets
     icon: "mdi:spray"
     dps:
       - id: 23
